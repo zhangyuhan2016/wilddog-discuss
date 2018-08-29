@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./test.css">
+</head>
+<body>
+<section id="userSpeak"></section>
+<script src="https://cdn.wilddog.com/sdk/js/2.5.8/wilddog.js"></script>
+<script src="./userSpeak.js"></script>
+<script>
+  new UserSpeak({
+    sid: 'speak',
+    num: 10,
+    config: {
+      syncURL: 'https://wd0126581988dtadhd.wilddogio.com'
+    }
+  })
+</script>
+</body>
+</html>

@@ -22,23 +22,17 @@ class UserSpeak {
   init () {
     wilddog.initializeApp(this.config)
     let query = wilddog.sync().ref(this.sid)
-    this.addLike = (k) =
-  >
-    query.child(k + '/h').transaction(c = > (c || 0) + 1
-  )
-    this.addSpeak = (o) =
-  >
-    {
+    this.addLike = (k) => query.child(k + '/h').transaction(c => (c || 0) + 1)
+    this.addSpeak = (o) => {
       query.push(o)
     }
 
     let data = null
     /* 时间倒序 */
-    this.data(query).reverse(s = > {
-      data = this.toArr(s.val()).sort((a, b) = > b.t - a.t
-  )
-    this.render(data)
-  })
+    this.data(query).reverse(s => {
+      data = this.toArr(s.val()).sort((a, b) => b.t - a.t)
+      this.render(data)
+    })
     /* 赞数排序 */
     // this.data(query).like(s => {
     //   data = this.toArr(s.val()).sort((a, b) => b.h - a.h)
@@ -49,55 +43,44 @@ class UserSpeak {
   /* 数据查询 */
   data (q) {
     let query = {}
-    query.reverse = (c) =
-  >
-    q.limitToLast(this.num)[this.sync ? 'on' : 'once']('value', c)
-    query.like = c =
-  >
-    q.orderByChild('h').limitToLast(this.num)[this.sync ? 'on' : 'once']('value', c)
+    query.reverse = (c) => q.limitToLast(this.num)[this.sync ? 'on' : 'once']('value', c)
+    query.like = c => q.orderByChild('h').limitToLast(this.num)[this.sync ? 'on' : 'once']('value', c)
     return query
   }
-
   /* 评论 */
-  speak (t, i) {
+  speak (t,i) {
     let sTime = 60
     let sIn = null
-    return (e) =
-  >
-    {
-      if (t.value.trim().length === 0) {
+    return (e) => {
+      if(t.value.trim().length === 0) {
         return t.focus()
       }
-      if (sTime !== 60) {return false}
+      if(sTime !== 60) {return false}
       let o = {
-        n: (i.value || '匿名').substr(0, 10),
-        s: t.value.substr(0, 150),
+        n: (i.value || '匿名').substr(0,10),
+        s: t.value.substr(0,150),
         t: new Date().getTime()
       }
       this.addSpeak(o)
       t.value = ''
       o.t = this.toTime(o.t)
       this.addNote(o)
-      sIn = setInterval(() = > {
+      sIn = setInterval(() => {
         e.className = 'ac'
-      e.innerText = sTime-- + ' s'
-      if (sTime === 1) {
-        clearInterval(sIn)
-        e.innerText = '评价'
-        e.className = ''
-        sTime = 60
-      }
-    },
-      1000
-    )
+        e.innerText = sTime--+' s'
+        if(sTime === 1) {
+          clearInterval(sIn)
+          e.innerText = '评价'
+          e.className = ''
+          sTime = 60
+        }
+      },1000)
     }
   }
 
   /* 点赞 */
   upLike (k) {
-    return (t) =
-  >
-    {
+    return (t) => {
       this.addLike(k)
       t.classList.add('ac')
       t.innerText = parseInt(t.innerText) + 1
@@ -111,45 +94,39 @@ class UserSpeak {
       text: '评论'
     }))
     let noteBox = this.createDom()
-    d.forEach(v = > {
+    d.forEach(v => {
       let o = v
       o.t = this.toTime(v.t)
-    o.event = {
-      'click': this.upLike(v.k)
-    }
-    noteBox.appendChild(this.createNote(o))
-  })
-    this.addNote = o =
-  >
-    noteBox.insertBefore(this.createNote(o), noteBox.firstChild)
+      o.event = {
+        'click': this.upLike(v.k)
+      }
+      noteBox.appendChild(this.createNote(o))
+    })
+    this.addNote = o => noteBox.insertBefore(this.createNote(o),noteBox.firstChild)
     document.querySelector(this.selecotr).appendChild(noteBox)
     let footer = this.createDom({classList: ['speak']})
     let text = this.createDom({
-        tag: 'textarea',
-        event: {
-          'input': (e) = > e.value = e.value.substr(0, 150)
+      tag: 'textarea',
+      event: {
+        'input': (e) => e.value = e.value.substr(0,150)
       },
-      callback
-  :
-    (e) =
-  >
-    {
-      e.setAttribute('placeholder', '写下你的想法,让更多人知道...')
-    }
-  })
+      callback: (e) => {
+        e.setAttribute('placeholder','写下你的想法,让更多人知道...')
+      }
+    })
     let inputBox = this.createDom({classList: ['name']})
     let inp = this.createDom({
       tag: 'input',
-      callback: (e) = > {
-      e.setAttribute('placeholder', '匿名')
-  }
-  })
+      callback: (e) => {
+        e.setAttribute('placeholder','匿名')
+      }
+    })
     inputBox.appendChild(inp)
     inputBox.appendChild(this.createDom({
       tag: 'button',
       text: '评论',
       event: {
-        'click': this.speak(text, inp)
+        'click': this.speak(text,inp)
       }
     }))
     footer.appendChild(text)
@@ -239,11 +216,10 @@ class UserSpeak {
     let sub = '小时'
     let nowI = 0
     let status = [old / y, old / m, old / w, old / d, old / h, old / f, old]
-    status.some((v, i) = > {
+    status.some((v, i) => {
       nowI = i
       return v >= 1
-    }
-  )
+    })
     switch (nowI) {
       case 0:
         sub = '年'

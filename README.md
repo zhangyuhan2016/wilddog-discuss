@@ -19,6 +19,12 @@
   <p>仅在<code>Chrome 62+</code>测试使用,其他浏览器未经测试</p>
 </div>
 
+## 预览效果
+0. 下载本地预览(开启安全域名,需本地服务)[下载](https://github.com/zhangyuhan2016/wilddog-discuss/releases/download/v0.0.2/open.html)
+1. [在线查看](https://zhangyuhan2016.github.io/article/new-blog.html)
+
+![demo](./demo.png)
+
 ## 准备工作
 0.  注册[野狗云](https://www.wilddog.com)
 1.  创建新应用 (实时通信引擎)

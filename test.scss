@@ -1,11 +1,11 @@
 #userSpeak {
   font-family: 微软雅黑;
-  $w: 600px;
-  width: $w;
+  margin: 20px auto;
+  width: 95%;
+  box-sizing: border-box;
   border: 1px solid #ebebeb;
   box-shadow: 0 1px 3px rgba(26,26,26,.1);
   background: #fff;
-  margin-top: 12px;
   overflow: visible;
   border-radius: 4px;
   .title {
@@ -19,7 +19,7 @@
     border-bottom: 1px solid #f6f6f6;
   }
   .note {
-    width: $w;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -106,7 +106,7 @@
     }
   }
   .speak {
-    width: $w;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 10px 20px;

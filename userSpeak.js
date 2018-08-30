@@ -20,6 +20,7 @@ class UserSpeak {
    * query 当前评论数据
    * */
   init () {
+    this.error()
     wilddog.initializeApp(this.config)
     let query = wilddog.sync().ref(this.sid)
     this.addLike = (k) => query.child(k + '/h').transaction(c => (c || 0) + 1)
@@ -244,6 +245,20 @@ class UserSpeak {
         break
     }
     return Math.floor(status[nowI]) + sub + '前'
+  }
+
+  /* 异常 */
+  error() {
+    window.onerror = (errorMessage, scriptURI, lineNo, columnNo, error) => {
+      if (scriptURI === 'https://cdn.wilddog.com/sdk/js/2.5.8/wilddog.js') {
+        document.querySelector(this.selecotr).innerHTML = `<div style="text-align: center;padding: 20px 0;">${error}</div>`
+      }
+      // console.log('errorMessage: ' + errorMessage); // 异常信息
+      // console.log('scriptURI: ' + scriptURI); // 异常文件路径
+      // console.log('lineNo: ' + lineNo); // 异常行号
+      // console.log('columnNo: ' + columnNo); // 异常列号
+      // console.log('error: ' + error); // 异常堆栈信息
+    };
   }
 }
  

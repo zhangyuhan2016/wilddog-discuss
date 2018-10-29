@@ -20,7 +20,7 @@
 </div>
 
 ## 预览效果
-0. 下载本地预览(开启安全域名,需本地服务)[下载](https://github.com/zhangyuhan2016/wilddog-discuss/releases/download/v0.0.2/open.html)
+0. 下载本地预览或编辑,这需要你进行一些准备工作[下载](https://github.com/zhangyuhan2016/wilddog-discuss/releases/download/v0.0.2/open.html)
 1. [在线查看](https://zhangyuhan2016.github.io/article/new-blog.html)
 
 ![demo](./demo.png)
